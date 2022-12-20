@@ -1,0 +1,111 @@
+#!/usr/bin/bash
+
+/usr/bin/clear
+
+exitProg=0
+progLogFile=./.prog.log
+
+writeMethodLog() {
+    m="$(date) method ${method} invoked"
+    echo "${m^}" >>$progLogFile
+}
+
+writeProgLog() {
+    program="$(date) script $0 $action"
+    echo "${program^}" >>$progLogFile
+}
+
+writeActionLog() {
+    action="$(date) script executed ${action^}"
+    echo "${action^}" >>$progLogFile
+}
+
+blinkText() {
+    text=$(echo -e "\e[38;5;254m${text^}\e[m")
+    /usr/bin/echo -e "\e[28;5;24m${text}\e[m\n"
+    method="blinkText"
+    writeMethodLog
+}
+
+displayMessage() {
+    text=$(echo -e "\e[38;5;254m${text^}\e[m")
+    /usr/bin/echo "$text"
+    method="displayMessage"
+    writeMethodLog
+}
+
+label() {
+    lbl=$(echo -e "\e[38;5;83m${lbl}\e[m")
+    method="label"
+    writeMethodLog
+}
+
+spacer() {
+    space=$(echo -e "\e[38;5;211m${space}\e[m")
+    method="spacer"
+    writeMethodLog
+}
+
+displayTitle() {
+    title=$(echo -e "\e[38;5;220m${title}\e[m")
+    /usr/bin/echo "${title^}"
+    method="displayTitle"
+    writeMethodLog
+}
+
+action="initialized"
+writeProgLog
+
+while [ $exitProg -ne 7 ]; do
+    text="Which task do you want to perform?"
+    displayMessage
+    /usr/bin/echo ""
+    lbl="1"
+    label
+    space=" - "
+    spacer
+    /usr/bin/echo "$lbl $space Generate password"
+    lbl="2"
+    label
+    /usr/bin/echo "$lbl $space Exit program "
+
+    read answer
+
+    case $answer in
+    1)
+        /usr/bin/clear
+        title="Generating password ..."
+        displayTitle
+        /usr/bin/echo ""
+        /usr/bin/sleep 0.4
+        /usr/bin/clear
+        text=$(apg -a 1 -M Sncl -m 17 -n 1 -E +\<\>\;:\|\\\^\'\",\.\={}*\-[]\`\~\)\(\/)
+        displayMessage
+        /usr/bin/echo ""
+        action="generated password"
+        writeActionLog
+        exitProg=7
+        ;;
+    2)
+        /usr/bin/clear
+        text="Exiting program ..."
+        displayMessage
+        /usr/bin/sleep 0.57
+        exitProg=7
+        /usr/bin/clear
+        action="user entered exit script code"
+        writeActionLog
+        ;;
+    *)
+        /usr/bin/clear
+        text="option ${answer^} is not available"
+        blinkText
+        action="user entered invalid option number"
+        writeActionLog
+        ;;
+    esac
+done
+
+action="exited"
+writeProgLog
+exit 0

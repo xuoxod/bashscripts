@@ -1,0 +1,5 @@
+Use 'sudo apt autoremove' to remove them.
+#
+# News about significant security updates, features and services will
+# appear here to raise awareness and perhaps tease /r/Linux ;)
+# Use 'pro config set apt_news=false' to hide this and future APT news.
