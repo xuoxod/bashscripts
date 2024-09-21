@@ -1,0 +1,5 @@
+*.sh.x*
+*.log
+.vscode
+*.txt
+*.c
