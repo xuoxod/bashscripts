@@ -21,7 +21,7 @@ done
 -------------------------------
 #     Copy directories
 
-scp -r -P 30778 -i ~/.ssh/id-from-xuoux-to-xuaux-ed25519 ./.user-helpers ./.user-scripts ./user-env ./.reference rick@192.168.1.158:/home/rick/private/projects/desktop/docker/proj1
+scp -r -P 22 -i ~/.ssh/id_ed25519 ./configs ./scripts user@10.0.0.158:/home/user/deploy
 
 -------------------------------
 

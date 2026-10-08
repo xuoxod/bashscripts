@@ -2,7 +2,7 @@
 
 ifconfig "$(netface)" down
 iwconfig "$(netface)" mode managed
-ifconfig "$(netface)" hw ether 00:19:d2:15:f6:6b
+ifconfig "$(netface)" hw ether 00:11:22:33:44:55
 
 # deauthenticate a user from an AP 
 # a = Access Point, c = Client MAC Address
